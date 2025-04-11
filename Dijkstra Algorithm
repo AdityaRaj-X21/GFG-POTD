@@ -1,0 +1,31 @@
+class Solution {
+    
+    public int[] dijkstra(int V, int[][] edges, int src) {
+        // code here
+        int[] dis = new int[V];
+        Arrays.fill(dis, Integer.MAX_VALUE);
+        dis[src] = 0;
+        boolean[] vis = new boolean[V];
+        PriorityQueue<int[]> pq = new PriorityQueue<>(Comparator.comparingInt(a -> a[1]));
+        ArrayList<ArrayList<int[]>> g = new ArrayList<>();
+        for(int i = 0; i < V; i++)  g.add(new ArrayList<>());
+        for(int i[] : edges){
+            g.get(i[0]).add(new int[]{i[1], i[2]});
+            g.get(i[1]).add(new int[]{i[0], i[2]});
+        }
+        pq.add(new int[]{src, 0});
+        while(!pq.isEmpty()){
+            int []r = pq.remove();
+            int u = r[0];
+            int w = r[1];
+            if(w > dis[u])  continue;
+            for(int i[] : g.get(u)){
+                if(i[1] + w < dis[i[0]]){
+                    dis[i[0]] = i[1] + w;
+                    pq.add(new int[]{i[0], i[1] + w});
+                }
+            }
+        }
+        return dis;
+    }
+}
