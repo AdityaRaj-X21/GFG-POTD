@@ -1,0 +1,10 @@
+class Solution {
+    public int findUnique(int[] arr) {
+        // code here
+       int unique=0;//xor with 0 doesnot affect the result
+        for(int i : arr){
+            unique ^= i;
+        }
+        return unique;
+    }
+}
