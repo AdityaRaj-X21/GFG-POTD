@@ -1,0 +1,30 @@
+class Solution {
+    // Function to find the length of a loop in the linked list.
+    public int countNodesinLoop(Node head) {
+        Node temp = head;
+        HashSet<Node> set = new HashSet<>();
+        
+        while(temp != null) {
+            if(set.contains(temp))
+                break;
+            else
+                set.add(temp);
+            temp = temp.next;
+        }
+        
+        int count = 0;
+        
+        if(temp != null) {
+            Node temp2 = temp;
+            temp = temp.next;
+            count++;
+            
+            while(temp2 != temp){
+                count++;
+                temp = temp.next;
+            }
+        }
+        
+        return count;
+    }
+}
