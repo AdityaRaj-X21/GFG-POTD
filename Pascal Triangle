@@ -1,0 +1,17 @@
+class Solution {
+
+    ArrayList<Integer> nthRowOfPascalTriangle(int n) {
+        ArrayList<Integer> row = new ArrayList<>();
+        long val = 1;
+        row.add((int) val); // First element is always 1
+
+        for (int k = 1; k < n; k++) {
+            // Compute next value using previous one
+            val = val * (n - k);
+            val = val / k;
+            row.add((int) val); // Type cast to int to match return type
+        }
+
+        return row;
+    }
+}
