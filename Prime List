@@ -1,0 +1,34 @@
+class Solution {
+    Node primeList(Node head) {
+        // code here
+        Node current = head;
+        while(current != null) {
+            current.val = getNearestPrime(current.val);
+            current = current.next;
+        }
+        return head;
+    }
+    
+    private int getNearestPrime(int num){
+        int lower = num;
+        int upper = num;
+        
+        while(true){
+            if (isPrime(lower)) return lower;
+            if (isPrime(upper)) return upper;
+            lower --;
+            upper++;
+        }
+    }
+    
+    private boolean isPrime(int n) {
+        if(n <= 1) return false;
+        if(n == 2) return true;
+        if(n % 2 == 0) return false;
+        
+        for(int i = 3; i * i <= n; i += 2){
+            if(n % i == 0) return false;
+        }
+        return true;
+    }
+}
