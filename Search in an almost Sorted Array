@@ -1,0 +1,32 @@
+class Solution {
+    private int get_mid(int arr[],  int mid1 , int  mid ,  int mid2) {
+        int a[]  =  {arr[mid],  arr[mid1],arr[mid2]};
+        Arrays.sort(a);
+        return a[1];
+    }
+    public int findTarget(int arr[], int target) {
+        // code here
+        int n =  arr.length;
+        int l  = 0 ; 
+        int  h  =  n-1;
+        while(l <=h) {
+            int mid  =  (l+h)>>1;
+            int mid1  =  Math.max(0,mid-1);
+            int mid2  =  Math.min(mid+1, n-1);
+            if(arr[mid] ==  target ) return mid;
+            if(arr[mid1] ==  target) return mid1;
+            if(arr[mid2] ==  target) return mid2;
+            
+            int val  =  get_mid(arr,mid1,mid,mid2);
+            if(target >  val) {
+                l = mid2+1;
+            }
+            else {
+                h  =mid1-1;
+            }
+            
+            
+        }        
+        return  -1;
+    }
+}
