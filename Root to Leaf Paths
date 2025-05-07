@@ -1,0 +1,18 @@
+class Solution:
+    def Paths(self, root : Optional['Node']) -> List[List[int]]:
+        # code here
+        ans = []
+
+        def rec(node, path):
+            if not node:
+                return
+            if not node.left and not node.right:
+                ans.append(path + [node.data])
+                return
+            if node.left:
+                rec(node.left, path + [node.data])
+            if node.right:
+                rec(node.right, path + [node.data])
+
+        rec(root, [])
+        return ans
