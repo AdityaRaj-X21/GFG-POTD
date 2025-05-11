@@ -1,0 +1,27 @@
+class Solution {
+    // Function to find the kth largest element in the given array.
+    kthLargest(arr, k) {
+        const n = arr.length;
+
+        // Compute the prefix sum array where prefix[i] is sum of elements from arr[0] to arr[i-1]
+        const prefix = new Array(n + 1).fill(0);
+        for (let i = 0; i < n; i++) {
+            prefix[i + 1] = prefix[i] + arr[i];
+        }
+
+        // Generate all possible contiguous subarray sums
+        const sums = [];
+        for (let i = 0; i < n; i++) {
+            for (let j = i + 1; j <= n; j++) {
+                // The sum of elements from arr[i] to arr[j-1] is prefix[j] - prefix[i]
+                sums.push(prefix[j] - prefix[i]);
+            }
+        }
+
+        // Sort the sums in descending order
+        sums.sort((a, b) => b - a);
+
+        // Return the k-th largest sum (1-based index, so k-1)
+        return sums[k - 1];
+    }
+}
