@@ -1,0 +1,23 @@
+class Solution {
+public:
+    vector<vector<int>> dp;
+
+    int pal(string &s, int i, int j) {
+        if (i >= j) return 0;
+        if (dp[i][j] != -1) return dp[i][j];
+        if (s[i] == s[j]) {
+            return dp[i][j] = pal(s, i + 1, j - 1);
+        }
+        else {
+            int first = 1 + pal(s, i + 1, j);
+            int second = 1 + pal(s, i, j - 1);
+            return dp[i][j] = min(first, second);
+        }
+    }
+
+    int minDeletions(string s) {
+        // code here
+        dp.assign(s.size() + 1, vector<int>(s.size() + 1, -1));
+        return pal(s, 0, s.size() - 1);
+    }
+};
